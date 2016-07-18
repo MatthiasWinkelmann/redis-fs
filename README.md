@@ -5,8 +5,18 @@ redis-fs lets you mount a Redis database as a filesystem. It is a continuation o
 
 [![Build Status](https://travis-ci.org/MatthiasWinkelmann/redis-fs.svg?branch=master)](https://travis-ci.org/MatthiasWinkelmann/redis-fs)
 
+## Help
+
+Please star this repository if you='re using redis-fs so that I know it's worth to contiue working on it.
+
+Please report any Issue you may encounter using redis-fs.
+
+Pull requests are welcome.
+
+## Usage
+
 ```bash
-redis-fs 0.0.0
+redis-fs 0.2.0
 $ redis-fs ~/redis
 
 --host, -h   localhost    Redis host name
@@ -17,7 +27,7 @@ $ redis-fs ~/redis
 
 ## What we can do with it?
 
-1. Create a fast auto-expanding RAM disk for (i. e.) working with temporary files.
+1. Create a fast, auto-expanding RAM disk for (i. e.) working with temporary files.
 1. Use `grep` to search for text in redis values.
 2. Pass data to other programs. ex: `$ cat redis-key | pretty-print`
 
@@ -27,16 +37,16 @@ $ redis-fs ~/redis
 
 ### Download binary file
 
-* [mac-amd64](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/0.2/redis-fs-darwin-amd64)
-* [linux-amd64](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/0.2/redis-fs-linux-amd64)
-* [linux-386](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/0.2/redis-fs-linux-386)
-* [linux-arm](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/0.2/redis-fs-linux-arm)
+* [mac-amd64](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/0.2.0/redis-fs-darwin-amd64)
+* [linux-amd64](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/0.2.0/redis-fs-linux-amd64)
+* [linux-386](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/0.2.0/redis-fs-linux-386)
+* [linux-arm](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/0.2.0/redis-fs-linux-arm)
 
 ### Build from source
 
 It is easy to build redis-fs from the source code. It takes four steps:
 
-1. Install `fuse` ([linux](http://fuse.sourceforge.net/), [mac](http://osxfuse.github.io/)). Redis-fs currently works with OS X Fuse 2.8.x but not the 3.x developer preview.
+1. Install `fuse` ([linux](http://fuse.sourceforge.net/), [mac](http://osxfuse.github.io/)). Redis-fs currently works with OS X FUSE 2.8.x but not the 3.x developer preview.
 2. Get the redis-fs source code from GitHub
 
   ```bash
@@ -61,13 +71,13 @@ $ make test
 
 ## Unmount
 
-Linux
+### Linux
 
 ```bash
 $ fusermount -u /tmp/redis
 ```
 
-MacOS
+### MacOS
 
 ```bash
 $ diskutil unmount /tmp/redis
