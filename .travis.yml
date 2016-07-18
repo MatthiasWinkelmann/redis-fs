@@ -1,0 +1,12 @@
+language: go
+
+go:
+  - 1.6
+
+services:
+  - redis-server
+
+before_install:
+  - sudo apt-get install -qq fuse
+
+install: make build
