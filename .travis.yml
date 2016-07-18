@@ -9,4 +9,4 @@ services:
 before_install:
   - sudo apt-get install -qq fuse
 
-install: make build
+install: make get-deps
