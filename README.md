@@ -37,10 +37,10 @@ $ redis-fs ~/redis
 
 ### Download binary file
 
-* [mac-amd64](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/0.2.0/redis-fs-darwin-amd64)
-* [linux-amd64](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/0.2.0/redis-fs-linux-amd64)
-* [linux-386](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/0.2.0/redis-fs-linux-386)
-* [linux-arm](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/0.2.0/redis-fs-linux-arm)
+* [mac-amd64](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/redis-fs-darwin-amd64)
+* [linux-amd64](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/redis-fs-linux-amd64)
+* [linux-386](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/redis-fs-linux-386)
+* [linux-arm](https://github.com/MatthiasWinkelmann/redis-fs/releases/download/redis-fs-linux-arm)
 
 ### Build from source
 
