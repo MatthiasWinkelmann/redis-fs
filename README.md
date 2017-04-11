@@ -1,13 +1,13 @@
 redis-fs
 ===========
 
-redis-fs lets you mount a Redis database as a filesystem. It is a continuation of redis-mount by Po-Ying Chen which was deleted from Github for unkown reasons.
+redis-fs lets you mount a Redis database as a filesystem. It is based on redis-mount by Po-Ying Chen which was deleted from Github for unknown reasons.
 
 [![Build Status](https://travis-ci.org/MatthiasWinkelmann/redis-fs.svg?branch=master)](https://travis-ci.org/MatthiasWinkelmann/redis-fs)
 
 ## Help
 
-Please star this repository if you='re using redis-fs so that I know it's worth to contiue working on it.
+Please star this repository if you're using redis-fs so that I know it's worth to continue working on it.
 
 Please report any Issue you may encounter using redis-fs.
 
