@@ -9,15 +9,17 @@ import "github.com/hanwen/go-fuse/fuse/nodefs"
 
 type redisFile struct {
 	pool *redis.Pool
-	key  string
+   key  string
+
 }
 
 func NewRedisFile(pool *redis.Pool, key string) nodefs.File {
 	file := new(redisFile)
 	file.pool = pool
-	file.key = key
+   file.key = key
 	return file
 }
+
 
 func (f *redisFile) SetInode(*nodefs.Inode) {
 }
@@ -51,6 +53,9 @@ func (f *redisFile) Read(buf []byte, off int64) (fuse.ReadResult, fuse.Status) {
 	return fuse.ReadResultData(data[off:end]), fuse.OK
 }
 
+func (f *redisFile) Flock(int) fuse.Status {
+   return fuse.OK
+}
 func (f *redisFile) Write(data []byte, off int64) (uint32, fuse.Status) {
 	conn := f.pool.Get()
 	defer conn.Close()
