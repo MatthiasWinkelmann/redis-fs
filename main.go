@@ -15,7 +15,7 @@ var App *cli.App
 var Name = "redis-fs"
 
 // app version
-var Version = "0.2.0"
+var Version = "0.2.1"
 
 // redis host name
 var HostFlag = cli.StringFlag{
