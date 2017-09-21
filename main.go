@@ -54,7 +54,6 @@ var SepFlag = cli.StringFlag{
 // fuse options
 var AllowOther = cli.BoolFlag{
     Name:   "allow-other",
-    Value: false,
     Usage: "allow other users to access the mount point",
   }
 
