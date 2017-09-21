@@ -52,10 +52,11 @@ var SepFlag = cli.StringFlag{
 }
 
 // fuse options
-var FuseFlag = cli.StringFlag{
-	Name: "fuse-options",
-	Usage: "set fuse options",
-}
+var AllowOther = cli.BashCompletionFlag = cli.BoolFlag{
+    Name:   "allow-other",
+    Value: false,
+    Usage: "allow other users to access the mount point",
+  }
 
 // help message template
 var AppHelpTemplate = "" +
@@ -79,7 +80,7 @@ func main() {
 		DbFlag,
 		AuthFlag,
 		SepFlag,
-		SepFlag,
+		AllowOther,
 	}
 
 	App.Action = run
@@ -123,7 +124,7 @@ func mount(ctx *cli.Context) (*fuse.Server, error) {
 	fs.Init()
 
         mountOpts := fuse.MountOptions{
-            AllowOther: true,
+		AllowOther: ctx.Bool("allow-other"),
         }
 
         nfs := pathfs.NewPathNodeFs(fs, nil)
