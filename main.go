@@ -31,7 +31,7 @@ var PortFlag = cli.IntFlag{
 	Usage: "set redis port number",
 }
 
-// redis port number
+// redis database number
 var DbFlag = cli.IntFlag{
 	Name:  "db",
 	Value: 0,
@@ -49,6 +49,12 @@ var SepFlag = cli.StringFlag{
 	Name:  "sep",
 	Value: ":",
 	Usage: "set redis key separator",
+}
+
+// fuse options
+var FuseFlag = cli.StringFlag{
+	Name: "fuse-options",
+	Usage: "set fuse options",
 }
 
 // help message template
@@ -72,6 +78,7 @@ func main() {
 		PortFlag,
 		DbFlag,
 		AuthFlag,
+		SepFlag,
 		SepFlag,
 	}
 
