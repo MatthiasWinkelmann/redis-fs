@@ -115,12 +115,19 @@ func mount(ctx *cli.Context) (*fuse.Server, error) {
 
 	fs.Init()
 
-	nfs := pathfs.NewPathNodeFs(fs, nil)
-	server, _, err := nodefs.MountRoot(mnt, nfs.Root(), nil)
+        mountOpts := fuse.MountOptions{
+            AllowOther: true,
+        }
 
-	if err != nil {
-		return nil, err
-	}
+        nfs := pathfs.NewPathNodeFs(fs, nil)
 
-	return server, nil
+        conn := nodefs.NewFileSystemConnector(nfs.Root(), nil)
+
+        server, err := fuse.NewServer(conn.RawFS(), mnt, &mountOpts)
+
+        if err != nil {
+                return nil, err
+        }
+
+        return server, nil
 }
