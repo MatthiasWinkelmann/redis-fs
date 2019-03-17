@@ -31,7 +31,7 @@ var PortFlag = cli.IntFlag{
 	Usage: "set redis port number",
 }
 
-// redis port number
+// redis database number
 var DbFlag = cli.IntFlag{
 	Name:  "db",
 	Value: 0,
@@ -50,6 +50,12 @@ var SepFlag = cli.StringFlag{
 	Value: ":",
 	Usage: "set redis key separator",
 }
+
+// fuse options
+var AllowOther = cli.BoolFlag{
+    Name:   "allow-other",
+    Usage: "allow other users to access the mount point",
+  }
 
 // help message template
 var AppHelpTemplate = "" +
@@ -73,6 +79,7 @@ func main() {
 		DbFlag,
 		AuthFlag,
 		SepFlag,
+		AllowOther,
 	}
 
 	App.Action = run
@@ -115,12 +122,19 @@ func mount(ctx *cli.Context) (*fuse.Server, error) {
 
 	fs.Init()
 
-	nfs := pathfs.NewPathNodeFs(fs, nil)
-	server, _, err := nodefs.MountRoot(mnt, nfs.Root(), nil)
+        mountOpts := fuse.MountOptions{
+		AllowOther: ctx.Bool("allow-other"),
+        }
 
-	if err != nil {
-		return nil, err
-	}
+        nfs := pathfs.NewPathNodeFs(fs, nil)
 
-	return server, nil
+        conn := nodefs.NewFileSystemConnector(nfs.Root(), nil)
+
+        server, err := fuse.NewServer(conn.RawFS(), mnt, &mountOpts)
+
+        if err != nil {
+                return nil, err
+        }
+
+        return server, nil
 }
