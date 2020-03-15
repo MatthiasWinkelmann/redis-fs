@@ -1,13 +1,16 @@
 package main
 
-import "os"
-import "fmt"
-import "path/filepath"
-import "github.com/codegangsta/cli"
-import "github.com/hanwen/go-fuse/fuse"
-import "github.com/hanwen/go-fuse/fuse/pathfs"
-import "github.com/hanwen/go-fuse/fuse/nodefs"
-import "github.com/MatthiasWinkelmann/redis-fs/redisfs"
+import (
+	"fmt"
+	"os"
+	"path/filepath"
+
+	"github.com/MatthiasWinkelmann/redis-fs/redisfs"
+	"github.com/codegangsta/cli"
+	"github.com/hanwen/go-fuse/fuse"
+	"github.com/hanwen/go-fuse/fuse/nodefs"
+	"github.com/hanwen/go-fuse/fuse/pathfs"
+)
 
 var App *cli.App
 
@@ -53,9 +56,9 @@ var SepFlag = cli.StringFlag{
 
 // fuse options
 var AllowOther = cli.BoolFlag{
-    Name:   "allow-other",
-    Usage: "allow other users to access the mount point",
-  }
+	Name:  "allow-other",
+	Usage: "allow other users to access the mount point",
+}
 
 // help message template
 var AppHelpTemplate = "" +
@@ -122,19 +125,20 @@ func mount(ctx *cli.Context) (*fuse.Server, error) {
 
 	fs.Init()
 
-        mountOpts := fuse.MountOptions{
-		AllowOther: ctx.Bool("allow-other"),
-        }
+	mountOpts := fuse.MountOptions{
+		AllowOther:  ctx.Bool("allow-other"),
+		EnableLocks: false,
+	}
 
-        nfs := pathfs.NewPathNodeFs(fs, nil)
+	nfs := pathfs.NewPathNodeFs(fs, nil)
 
-        conn := nodefs.NewFileSystemConnector(nfs.Root(), nil)
+	conn := nodefs.NewFileSystemConnector(nfs.Root(), nil)
 
-        server, err := fuse.NewServer(conn.RawFS(), mnt, &mountOpts)
+	server, err := fuse.NewServer(conn.RawFS(), mnt, &mountOpts)
 
-        if err != nil {
-                return nil, err
-        }
+	if err != nil {
+		return nil, err
+	}
 
-        return server, nil
+	return server, nil
 }

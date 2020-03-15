@@ -1,4 +1,2 @@
+/redis-fs
 .DS_Store
-bin/*
-src/*
-pkg/*

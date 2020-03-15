@@ -1,25 +1,26 @@
 package redisfs
 
-import "log"
-import "time"
-import "bytes"
-import "github.com/hanwen/go-fuse/fuse"
-import "github.com/garyburd/redigo/redis"
-import "github.com/hanwen/go-fuse/fuse/nodefs"
+import (
+	"bytes"
+	"log"
+	"time"
+
+	"github.com/garyburd/redigo/redis"
+	"github.com/hanwen/go-fuse/fuse"
+	"github.com/hanwen/go-fuse/fuse/nodefs"
+)
 
 type redisFile struct {
 	pool *redis.Pool
-   key  string
-
+	key  string
 }
 
 func NewRedisFile(pool *redis.Pool, key string) nodefs.File {
 	file := new(redisFile)
 	file.pool = pool
-   file.key = key
+	file.key = key
 	return file
 }
-
 
 func (f *redisFile) SetInode(*nodefs.Inode) {
 }
@@ -54,7 +55,7 @@ func (f *redisFile) Read(buf []byte, off int64) (fuse.ReadResult, fuse.Status) {
 }
 
 func (f *redisFile) Flock(int) fuse.Status {
-   return fuse.OK
+	return fuse.OK
 }
 func (f *redisFile) Write(data []byte, off int64) (uint32, fuse.Status) {
 	conn := f.pool.Get()
@@ -115,6 +116,18 @@ func (f *redisFile) GetAttr(out *fuse.Attr) fuse.Status {
 	out.Size = uint64(len(content))
 
 	return fuse.OK
+}
+
+func (f *redisFile) GetLk(owner uint64, lk *fuse.FileLock, flags uint32, out *fuse.FileLock) (code fuse.Status) {
+	return fuse.ENOSYS
+}
+
+func (f *redisFile) SetLk(owner uint64, lk *fuse.FileLock, flags uint32) (code fuse.Status) {
+	return fuse.ENOSYS
+}
+
+func (f *redisFile) SetLkw(owner uint64, lk *fuse.FileLock, flags uint32) (code fuse.Status) {
+	return fuse.ENOSYS
 }
 
 func (f *redisFile) Fsync(flags int) (code fuse.Status) {
