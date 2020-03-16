@@ -9,7 +9,6 @@ RUN make get-deps
 
 COPY . .
 RUN make build
-RUN ls -l redis-fs
 
 # Can't run this without a running redis instance
 # RUN make test
