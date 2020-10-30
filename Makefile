@@ -1,8 +1,7 @@
 APPNAME=redis-fs
-SERVICEPATH=github.com/MatthiasWinkelmann
 
 ENTRYPOINT=main.go
-GOPATH=$(shell pwd)
+GO111MODULE=auto
 
 define build
 	echo $(APPNAME)-$(1)-$(2); \
@@ -27,13 +26,11 @@ build:
 	@go build
 
 get-deps:
-	@go get github.com/codegangsta/cli
-	@go get github.com/hanwen/go-fuse/fuse
+	@go get github.com/codegangsta/cli@v1.19.1
+	@go get github.com/hanwen/go-fuse/fuse@v1.0.0
 	@go get github.com/visionmedia/go-debug
 	@go get github.com/garyburd/redigo/redis
 	@go get github.com/smartystreets/goconvey/convey
-	@mkdir -p src/$(SERVICEPATH)
-	ln -s $(GOPATH) src/$(SERVICEPATH)/$(APPNAME)
 
 clean:
 	-@rm -rf bin src pkg
