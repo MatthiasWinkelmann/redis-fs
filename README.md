@@ -1,17 +1,16 @@
 redis-fs
 ===========
 
+Note: This is largely abandoned by me, as it was by others, before. So it probably has issues. 
+
+The main reason is that it's slow. I couldn't get even close to rotating disk HDD transfer rates.  believe that was the whole point, back when I still knew what I was trying to do...
+
+## Sawing off the branch I'm sitting on...
+
+Check out the forks ion the Insights tab, above, and you might find someone who took this idea and ran with it. [LexVocoder](https://github.com/LexVocoder) and [Promaethius](https://github.com/Promaethius) were the last being frudtrated by my inactivity.
+
 redis-fs lets you mount a Redis database as a filesystem. It is based on redis-mount by Po-Ying Chen which was deleted from Github for unknown reasons.
 
-[![Build Status](https://travis-ci.org/MatthiasWinkelmann/redis-fs.svg?branch=master)](https://travis-ci.org/MatthiasWinkelmann/redis-fs)
-
-## Help
-
-Please star this repository if you're using redis-fs so that I know it's worth to continue working on it.
-
-Please report any Issue you may encounter using redis-fs.
-
-Pull requests are welcome.
 
 ## Usage
 
@@ -24,14 +23,6 @@ $ redis-fs ~/redis
 --auth, -a                Redis password
 --sep, -s    :            Redis key separator
 ```
-
-## What we can do with it?
-
-1. Create a fast, auto-expanding RAM disk for (i. e.) working with temporary files.
-1. Use `grep` to search for text in redis values.
-2. Pass data to other programs. ex: `$ cat redis-key | pretty-print`
-
-![screenshot](documentation/screenshot.gif)
 
 ## Installation
 
